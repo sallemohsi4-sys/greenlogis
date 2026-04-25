@@ -1,0 +1,13 @@
+origine,destination,mode,distance_km,poids_tonnes,date,categorie
+Casablanca,Marrakech,camion_diesel_grand,240,8,2024-01-15,textile
+Casablanca,Agadir,camion_diesel_grand,460,12,2024-01-15,alimentaire
+Casablanca,Fes,camion_diesel_moyen,290,6,2024-01-16,textile
+Casablanca,Agadir,camion_diesel_grand,460,9,2024-01-16,alimentaire
+Tanger,Casablanca,train_electrique,340,22,2024-01-17,industrie
+Casablanca,Rabat,camion_diesel_petit,90,4,2024-01-17,electronique
+Paris,Lyon,camion_diesel_grand,465,15,2024-01-15,automobile
+Paris,Lyon,camion_diesel_grand,465,11,2024-01-15,automobile
+Hambourg,Munich,camion_diesel_grand,780,18,2024-01-16,chimie
+Paris,Berlin,avion_fret,1050,2,2024-01-17,electronique
+Marseille,Rome,bateau_conteneur,1200,35,2024-01-18,alimentaire
+Madrid,Barcelone,camion_diesel_moyen,620,14,2024-01-18,textile
