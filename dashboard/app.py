@@ -71,9 +71,16 @@ CHEMIN_DEMO = os.path.join(
 )
 
 @st.cache_data(show_spinner="🔄 Analyse du réseau en cours...")
-def charger_et_analyser(source):
-    """Charge, analyse et optimise le réseau logistique (mis en cache)."""
-    df  = analyser_reseau(source)
+def charger_et_analyser(chemin_csv: str):
+    """Charge depuis un chemin CSV string (données démo). Résultat mis en cache."""
+    df  = analyser_reseau(chemin_csv)
+    res = resume_reseau(df)
+    opt = optimiser_reseau(df)
+    return df, res, opt
+
+def analyser_dataframe(df_brut: pd.DataFrame):
+    """Analyse un DataFrame issu d'un fichier uploadé (pas de cache — fichier dynamique)."""
+    df  = analyser_reseau(df_brut)
     res = resume_reseau(df)
     opt = optimiser_reseau(df)
     return df, res, opt
@@ -126,12 +133,15 @@ with st.sidebar:
 # ────────────────────────────────────────────────────────────────
 try:
     if uploaded is not None:
-        source = uploaded
+        # UploadedFile → DataFrame pandas, puis analyse sans cache
+        # (st.cache_data ne peut pas hasher un objet UploadedFile)
+        df_upload = pd.read_csv(uploaded, encoding="utf-8")
+        df, res, opt = analyser_dataframe(df_upload)
     else:
-        source = CHEMIN_DEMO
+        # Chemin string → analyse avec cache Streamlit
+        df, res, opt = charger_et_analyser(CHEMIN_DEMO)
 
-    df, res, opt = charger_et_analyser(source)
-    synthese = opt["synthese"]
+    synthese       = opt["synthese"]
     consolidations = opt["consolidations"]
     modal_shifts   = opt["modal_shifts"]
     ev_routes      = opt["ev_routes"]
